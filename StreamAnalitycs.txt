@@ -1,0 +1,16 @@
+SELECT
+    *
+INTO
+    tfmpower
+FROM
+    EVENT
+where no_cita = 0 
+and ANTIGUEDAD < 5
+and EDAD edad between  20 and 40
+
+SELECT
+    *
+INTO
+    tfmdatalake
+FROM
+    EVENT
