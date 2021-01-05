@@ -1,0 +1,46 @@
+import smtplib
+from email.mime.text import MIMEText
+
+# Lista de destinatarios, que está compuesta por
+# tuplas de dos elemento, nombre y email
+data='tfmcorreo'
+destinatarios = pd.read_csv[data]
+
+
+# Mensaje general para todos
+mensaje = """
+Hola,
+
+Gracias por contactarnos, recuerde que tiene los servicios web disponibles para esta gestión
+
+"""
+for destinatario in destinatarios:
+    # Usamos try-except para captuar errores en caso de que ocurran y así
+    # el programa puede continuar con el resto de la lista
+    try:
+        # Añadimos el nombre al mensaje
+        # Usamos un texto de texto plano (otra opción es html
+        msg = MIMEText(mensaje.format(nombre=destinatario[0]), 'plain')
+
+        msg['From'] = "Empresa <empresa@empresa.com>"
+        msg['Subject'] = "información importante"
+
+        # Destinatario en formato "<email>"
+        msg['To'] = "<%s>" % destinatario
+
+        # Creamos la instancia de email con el servidor local, que debe
+        # tener instalado un servidor de correo como postfix o similar.
+        servidor = smtplib.SMTP('localhost')
+
+        # Ahora se envía en mensaje
+        servidor.send_message(msg)
+        servidor.quit()
+
+        print("Mensaje enviado a {}".format(destinatario[0]))
+
+    except:
+        print("Hubo un error enviando el email a {}".format(destinatario[1]) )
+
+# no es necesario en este caso esta sentancia ya que enviamos el correo desde una cuenta corporativa
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.login(gmail_user, gmail_password)
