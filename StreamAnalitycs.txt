@@ -14,3 +14,7 @@ INTO
     tfmdatalake
 FROM
     EVENT
+
+select correo
+into tfmcorreo
+from EVENT
