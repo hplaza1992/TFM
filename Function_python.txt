@@ -1,10 +1,13 @@
 import smtplib
 from email.mime.text import MIMEText
 
-# Lista de destinatarios, que está compuesta por
-# tuplas de dos elemento, nombre y email
-data='tfmcorreo'
-destinatarios = pd.read_csv[data]
+# Lista de destinatarios de ejemplo
+destinatarios = [
+    ("carlos", "irene@example.com"),
+    ("fernando", "matias@example.com"),
+    ("olga", "carme@example.com"),
+    ("jose", "pepe@example.com")
+]
 
 
 # Mensaje general para todos
@@ -28,18 +31,13 @@ for destinatario in destinatarios:
         # Destinatario en formato "<email>"
         msg['To'] = "<%s>" % destinatario
 
-        # Creamos la instancia de email con el servidor local, que debe
-        # tener instalado un servidor de correo como postfix o similar.
+        # Creamos la instancia de email con el servidor local
         servidor = smtplib.SMTP('localhost')
 
         # Ahora se envía en mensaje
         servidor.send_message(msg)
         servidor.quit()
 
-        print("Mensaje enviado a {}".format(destinatario[0]))
-
-    except:
-        print("Hubo un error enviando el email a {}".format(destinatario[1]) )
 
 # no es necesario en este caso esta sentancia ya que enviamos el correo desde una cuenta corporativa
 server = smtplib.SMTP('smtp.gmail.com', 587)
